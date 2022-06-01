@@ -2,18 +2,22 @@
 const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
+    mongoose = require('mongoose'),
+    config = require('./config.js'),
     Sensor = require('./models/SensorsModel');
 const bodyParser = require("body-parser");
 
-/*if (process.env.NODE_ENV !== 'test') {*/
-/*    mongoose.connect(config.database, config.dbsettings)*/
-/*        .then(res => {*/
-/*            console.log("DB Connected!")*/
-/*        })*/
-/*        .catch(err => {*/
-/*            console.log(Error, err.message);*/
-/*        });*/
-/*}*/
+console.log(process.env.NODE_ENV);
+
+if (process.env.NODE_ENV !== 'test ') {
+    mongoose.connect(config.database, config.dbsettings)
+        .then(res => {
+            console.log("DB Connected!")
+        })
+        .catch(err => {
+            console.log(Error, err.message);
+        });
+}
 //app.use(express.urlencoded({extended:true}));
 //app.use(express.json());
 
