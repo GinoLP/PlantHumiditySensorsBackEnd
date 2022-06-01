@@ -1,8 +1,8 @@
 'use strict';
 const express = require('express'),
     app = express(),
-    port = process.env.PORT || 3000;
-
+    port = process.env.PORT || 3000,
+    Sensor = require('./models/SensorsModel');
 const bodyParser = require("body-parser");
 
 /*if (process.env.NODE_ENV !== 'test') {*/
