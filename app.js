@@ -1,10 +1,8 @@
 'use strict';
 const express = require('express'),
     app = express(),
-    port = process.env.PORT || 3000,
-    mongoose = require('mongoose'),
-    config = require('./config.js'),
-    Sensor = require('./models/SensorsModel');
+    port = process.env.PORT || 3000;
+
 const bodyParser = require("body-parser");
 
 /*if (process.env.NODE_ENV !== 'test') {*/
@@ -23,9 +21,9 @@ app.use(bodyParser.json());
 const routes = require('./routes/SensorsRoutes');
 routes(app);
 
-app.get('*', (req, res) => {
+/*app.get('*', (req, res) => {
     res.status(404).send({url:`${req.originalUrl} not found`});
-});
+});*/
 
 const server = app.listen(
     port,
