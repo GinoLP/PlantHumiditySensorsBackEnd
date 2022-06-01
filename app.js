@@ -5,17 +5,21 @@ const express = require('express'),
     mongoose = require('mongoose'),
     config = require('./config.js'),
     Sensor = require('./models/SensorsModel');
+const bodyParser = require("body-parser");
 
-mongoose.connect(config.database,config.dbsettings)
-    .then(res => {
-        console.log("DB Connected!")})
-    .catch(err => {
-        console.log(Error, err.message);
-});
+/*if (process.env.NODE_ENV !== 'test') {*/
+/*    mongoose.connect(config.database, config.dbsettings)*/
+/*        .then(res => {*/
+/*            console.log("DB Connected!")*/
+/*        })*/
+/*        .catch(err => {*/
+/*            console.log(Error, err.message);*/
+/*        });*/
+/*}*/
+//app.use(express.urlencoded({extended:true}));
+//app.use(express.json());
 
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
-
+app.use(bodyParser.json());
 const routes = require('./routes/SensorsRoutes');
 routes(app);
 
@@ -23,8 +27,9 @@ app.get('*', (req, res) => {
     res.status(404).send({url:`${req.originalUrl} not found`});
 });
 
-app.listen(port);
+const server = app.listen(
+    port,
+    console.log(`REST API running on port: ${port}`)
+);
 
-console.log(`REST API running on port: ${port}`);
-
-module.exports = app;
+module.exports = {app, server};
