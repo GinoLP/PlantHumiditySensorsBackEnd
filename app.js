@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 
 console.log(process.env.NODE_ENV);
 
-if (process.env.NODE_ENV !== 'test ') {
+if (process.env.NODE_ENV.trim() !== 'test') {
     mongoose.connect(config.database, config.dbsettings)
         .then(res => {
             console.log("DB Connected!")
