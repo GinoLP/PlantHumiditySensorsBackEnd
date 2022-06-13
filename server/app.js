@@ -4,8 +4,9 @@ const express = require('express'),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     config = require('./config.js'),
-    Sensor = require('./models/SensorsModel');
-const bodyParser = require("body-parser");
+    path = require("path"),
+    Sensor = require('./models/SensorsModel'),
+    bodyParser = require("body-parser");
 
 console.log(process.env.NODE_ENV);
 
@@ -18,9 +19,8 @@ if (process.env.NODE_ENV.trim() !== 'test') {
             console.log(Error, err.message);
         });
 }
-//app.use(express.urlencoded({extended:true}));
-//app.use(express.json());
 
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(bodyParser.json());
 const routes = require('./routes/SensorsRoutes');
 routes(app);
