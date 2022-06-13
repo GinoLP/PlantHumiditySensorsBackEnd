@@ -25,10 +25,6 @@ app.use(bodyParser.json());
 const routes = require('./routes/SensorsRoutes');
 routes(app);
 
-/*app.get('*', (req, res) => {
-    res.status(404).send({url:`${req.originalUrl} not found`});
-});*/
-
 const server = app.listen(
     port,
     console.log(`REST API running on port: ${port}`)
