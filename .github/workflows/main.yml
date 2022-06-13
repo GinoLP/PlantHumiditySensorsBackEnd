@@ -23,7 +23,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Setup Node.js environment
+      - name: Setup server Node.js environment
         uses: actions/setup-node@v3.2.0
         with:
           node-version: '14.x'
@@ -31,7 +31,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: ~/server/.npm
           key: npm-${{ hashFiles('package-lock.json') }}
           restore-keys: npm-
 
