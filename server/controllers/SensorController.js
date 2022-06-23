@@ -1,7 +1,11 @@
 'use strict';
 
 const mongoose = require('mongoose'),
-    Sensor = mongoose.model('Sensors');
+    Sensor = mongoose.model('Sensors'),
+    multer = require('multer');
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 exports.getAllSensors = (req, res) => {
     Sensor.find({}, (error, result) => {
@@ -13,7 +17,10 @@ exports.getAllSensors = (req, res) => {
 };
 
 exports.createNewSensor = (req, res) => {
+    const path = req.file.path.replace(/\\/g, "/")
+
     let newSensor = new Sensor(req.body);
+    newSensor.plantPicture = "https://plant-humidity-sensors.herokuapp.com/" + path;
     newSensor.save((error, result) => {
         if (error)
             res.send(error);
