@@ -26,6 +26,6 @@ describe("/sensors endpoint", () => {
         expect(response.body.name).toBe("monstera");
         expect(response.body.plantName).toBe("Begonia Maculata");
         expect(response.body.minHumidity).toBe(5);
-        expect(response.body.maxHumidity).toBe("10");
+        expect(response.body.maxHumidity).toBe(10);
     })
 })

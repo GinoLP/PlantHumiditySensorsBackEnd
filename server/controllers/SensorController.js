@@ -2,10 +2,7 @@
 
 const mongoose = require('mongoose'),
     Sensor = mongoose.model('Sensors'),
-    multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+    Pictures = mongoose.model('PlantPictures');
 
 exports.getAllSensors = (req, res) => {
     Sensor.find({}, (error, result) => {
@@ -17,10 +14,7 @@ exports.getAllSensors = (req, res) => {
 };
 
 exports.createNewSensor = (req, res) => {
-    const path = req.file.path.replace(/\\/g, "/")
-
     let newSensor = new Sensor(req.body);
-    newSensor.plantPicture = "https://plant-humidity-sensors.herokuapp.com/" + path;
     newSensor.save((error, result) => {
         if (error)
             res.send(error);
@@ -36,7 +30,27 @@ exports.getSensor = (req, res) => {
 exports.updateSensor = (req, res) => {
     findById(req, res);
 }
+exports.addPictureWithId = (req, res) => {
+    console.log(req.body);
+    Pictures.findById(req.body.pictureId, (error, result) =>{
+        if (error)
+            res.send(error);
+    });
+    console.log(req.body);
+    Sensor.updateOne(
+        {
+            _id: mongoose.Types.ObjectId("6297e11efa979a214bbf1c0e")
+        },{
+            $set:{
+                plantPictureId: mongoose.Types.ObjectId(req.body.pictureId)
+            }
+        },(error, result) => {
+            if (error)
+                res.send(error);
 
+            res.send(result);
+        });
+}
 exports.removeSensor = (req, res) => {
     Sensor.remove({
         _id: req.params.sensorId

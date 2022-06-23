@@ -6,11 +6,12 @@ const express = require('express'),
     config = require('./config.js'),
     path = require("path"),
     Sensor = require('./models/SensorsModel'),
+    Upload = require('./models/PlantPicturesModel'),
     bodyParser = require("body-parser");
 
 console.log(process.env.NODE_ENV);
 
-if (process.env.NODE_ENV.trim() !== 'test') {
+/*if (process.env.NODE_ENV.trim() !== 'test') {
     mongoose.connect(config.database, config.dbsettings)
         .then(res => {
             console.log("DB Connected!")
@@ -18,7 +19,15 @@ if (process.env.NODE_ENV.trim() !== 'test') {
         .catch(err => {
             console.log(Error, err.message);
         });
-}
+}*/
+
+mongoose.connect(config.database, config.dbsettings)
+    .then(res => {
+        console.log("DB Connected!")
+    })
+    .catch(err => {
+        console.log(Error, err.message);
+    });
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(bodyParser.json());
