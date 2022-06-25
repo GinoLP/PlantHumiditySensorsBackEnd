@@ -47,9 +47,9 @@ module.exports = (app) => {
 
     app.route('/sensors/:sensorId')
         .get(Sensors.getSensor)
-        //.put(Sensors.updateSensor)
+        .put(Sensors.updateSensor)
         .delete(Sensors.removeSensor);
 
     app.route('/sensors/addPicture')
-        .put(Sensors.addPictureWithId);
+        .patch(Sensors.addPictureWithId);
 };

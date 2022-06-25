@@ -9,7 +9,7 @@ exports.getAllSensors = (req, res) => {
         if (error)
             res.send(error);
 
-        res.json(result);
+        res.json({result});
     });
 };
 
@@ -24,11 +24,13 @@ exports.createNewSensor = (req, res) => {
 }
 
 exports.getSensor = (req, res) => {
-    findById(req, res);
+    let sensor = findById(req, res);
+    res.json({Sensor: sensor.toObject({getters: true})});
 }
 
 exports.updateSensor = (req, res) => {
-    findById(req, res);
+    let updatedSensor = findById(req, res);
+    res.json({updatedSensor});
 }
 exports.addPictureWithId = (req, res) => {
     console.log(req.body);
@@ -67,6 +69,6 @@ function findById(req,res) {
         if (error)
             res.send(error);
 
-        res.json(result);
+        return result;
     })
 }
