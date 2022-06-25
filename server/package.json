@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "",
+    "test": "SET NODE_ENV=test & jest app.test.js",
     "heroku-postbuild": "cd ../client && npm install && npm run build"
   },
   "author": "",
