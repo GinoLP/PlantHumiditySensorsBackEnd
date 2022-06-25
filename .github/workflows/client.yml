@@ -34,5 +34,6 @@ jobs:
     steps:
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
+          path: ~/client/.npm
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_API_KEY }}
           NETLIFY_DEPLOY_TO_PROD: true
