@@ -30,6 +30,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: [build]
     name: 'Deploy to Netlify'
     steps:
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
