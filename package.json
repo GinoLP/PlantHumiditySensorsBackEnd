@@ -4,6 +4,6 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "start": "cd ./server && npm start"
+      "start": "cd ./client && npm start"
     }
   }
